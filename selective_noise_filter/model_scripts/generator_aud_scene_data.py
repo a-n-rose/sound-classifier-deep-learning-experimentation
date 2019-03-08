@@ -61,8 +61,11 @@ class Generator:
         self.step_size = step_size
         self.frame_width = frame_width
         self.batch_size = timesteps * frame_width
+        print("batch size of data generator: ",self.batch_size)
         self.samples_per_epoch = data.shape[0]
+        print("total samples for each epoch: ",self.samples_per_epoch)
         self.number_of_batches = self.samples_per_epoch/self.batch_size
+        print("number of batches: ",self.number_of_batches)
         self.counter=0
         self.dict_classes_encountered = {}
         self.data = data

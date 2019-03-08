@@ -34,8 +34,11 @@ def buildmodel(model_type,num_labels,frame_width,timesteps,step_size,num_feature
     elif 'cnnlstm' == model_type.lower():
         cnn = Sequential()
         cnn.add(Conv2D(feature_map_filters, kernel_size=kernel_size, activation='relu'))
-        #non-overlapping pool_size 3x3
+        #non-overlapping pool_size
         cnn.add(MaxPooling2D(pool_size=pool_size))
+        #cnn.add(Conv2D(feature_map_filters*2, kernel_size=kernel_size, activation='relu'))
+        ##further reduce dimensionality
+        #cnn.add(MaxPooling2D(pool_size=pool_size))
         cnn.add(Dropout(0.25))
         cnn.add(Flatten())
 
@@ -47,7 +50,7 @@ def buildmodel(model_type,num_labels,frame_width,timesteps,step_size,num_feature
         else:
             model.add(TimeDistributed(cnn,input_shape=((timesteps*frame_width - frame_width)//step_size,frame_width,num_features,color_scale)))
         model.add(LSTM(lstm_cells,return_sequences=True))
-        model.add(LSTM(lstm_cells,return_sequences=True))
+        #model.add(LSTM(lstm_cells,return_sequences=True))
 
     model.add(Flatten())
     model.add(Dense(num_labels,activation=activation_output)) 

@@ -56,17 +56,17 @@ def main(model_type,epochs,optimizer,sparse_targets,patience,duration,window_shi
     #timestep = 10
 
     #i.e: overlap == 5:
-    #0-31
-    #4-36
-    #9-41
-    #14-46
-    #19-51
-    #24-56
-    #29-61
-    #34-66
-    #39-71
-    #44-76
-    #49-81
+    #0-30
+    #4-35
+    #9-40
+    #14-45
+    #19-50
+    #24-55
+    #29-60
+    #34-65
+    #39-70
+    #44-75
+    #49-80
     
     
     head_folder_curr_project = "./office"
@@ -99,15 +99,19 @@ def main(model_type,epochs,optimizer,sparse_targets,patience,duration,window_shi
     #timesteps = int(feats_dict['timesteps'])
     #context_window = int(feats_dict['context window'])
     
-    #options:
-    #3 sets of 27 sample-frames --> 82 samples in series (no overlap)
-    #6 sets of 13 sample-frames
-    #7 sets of 11 sample-frames
-    context_window = 5
+
+    #no overlap
+    # possible with total 81 samps:
+    '''
+    frame_width = 9
+    timestep = 9
+    no overlap
+    '''
+    context_window = 4
     frame_width = context_window * 2 + 1
     num_labels = 11
     num_features = 401
-    timesteps = 7
+    timesteps = 9
     if overlap:
         step_size = (total_feat_samps - frame_width) // (timesteps - 1)
         #overlap = step1 // (timestep-1)
@@ -124,7 +128,6 @@ def main(model_type,epochs,optimizer,sparse_targets,patience,duration,window_shi
         #print(key," : ",item)
     
     # specify some additional variables:
-    frame_width = context_window*2+1
     #is for convolutional neural networks. They need to know which colors they're working with. 1 --> grayscale, 3 --> rgb or red-green-blue, 4 --> rgba or red-green-blue-alpha (whatever that last one is)
     color_scale = 1 
     #####################################################################
@@ -142,7 +145,7 @@ def main(model_type,epochs,optimizer,sparse_targets,patience,duration,window_shi
     feature_map_filters = num_features
     kernel_size = (8,4)
     #maxpooling
-    pool_size = (3,3)
+    pool_size = (2,2)
     #hidden dense layer
     dense_hidden_units = 60
     
