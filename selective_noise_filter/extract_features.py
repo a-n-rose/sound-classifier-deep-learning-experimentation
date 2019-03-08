@@ -72,7 +72,6 @@ def get_date():
     This creates a string of the day, hour, minute and second
     I use this to make folder names unique
     
-    For the files themselves, I generate genuinely unique names (i.e. name001.csv, name002.csv, etc.)
     '''
     time = datetime.datetime.now()
     time_str = "{}y{}m{}d{}h{}m{}s".format(time.year,time.month,time.day,time.hour,time.minute,time.second)
@@ -121,9 +120,9 @@ if __name__ == "__main__":
     paths_encodedlabels_rand_test, __ = waves_env.waves_labels2path_ints(data_path_test,wl_dict_test)
 
     #extract features
-    directory_train = "{}train_data".format(waves_env.feature_dir)
-    directory_val = "{}val_data".format(waves_env.feature_dir)
-    directory_test = "{}test_data".format(waves_env.feature_dir)
+    directory_train = "{}data_train".format(waves_env.feature_dir)
+    directory_val = "{}data_val".format(waves_env.feature_dir)
+    directory_test = "{}data_test".format(waves_env.feature_dir)
     
     feats_train = FeaturePrep(feature_type, window_size, window_shift, sr, duration, num_features = None, directory = directory_train)
     feats_val = FeaturePrep(feature_type, window_size, window_shift, sr, duration, num_features = None, directory = directory_val)
